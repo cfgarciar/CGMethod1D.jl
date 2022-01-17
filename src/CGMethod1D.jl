@@ -1,5 +1,13 @@
 module CGMethod1D
 
-# Write your package code here.
+using Reexport
+@reexport using Ferrite
 
-end
+
+include("exports.jl")
+include("interpolations.jl")
+include("quadrature.jl")
+include("utils.jl")
+
+
+end #Module
