@@ -23,8 +23,6 @@
 using CGMethod1D
 using Documenter, Pkg
 
-Pkg.precompile()
-
 push!(LOAD_PATH,"../src/")
 
 makedocs(
