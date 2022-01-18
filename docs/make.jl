@@ -12,5 +12,7 @@ makedocs(
                ])
 
 deploydocs(;
-    repo="github.com/cfgarciar/CGMethod1D.jl",
+    repo="github.com/cfgarciar/CGMethod1D.jl.git",
+    target = "build",
+    push_preview = true,
 )
