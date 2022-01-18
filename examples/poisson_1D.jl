@@ -4,17 +4,16 @@ using Ferrite
 grid = generate_grid(Line, (10,))
 
 dim = 1
-order = 1
+order = 3
 ip = Lagrange{dim, RefLine, order}()
-qr = QuadratureRule{dim, RefCube}(order)
+qr = QuadratureRule{dim, RefLine}(order)
 # cellvalues = CellScalarValues(qr, ip)
 
 
-
-
 # dh = DofHandler(grid)
-# push!(dh, :u, 1)
-# close!(dh);
+# push!(dh, :p, 1, ip)
+# # push!(dh, :p, 1)
+# close!(dh)
 
 # K = create_sparsity_pattern(dh);
 
@@ -71,6 +70,3 @@ qr = QuadratureRule{dim, RefCube}(order)
 
 # apply!(K, f, ch)
 # u = K \ f;
-
-# ip = Lagrange{2,RefTetrahedron,2}()
-# getnbasefunctions(ip)
