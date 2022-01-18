@@ -35,11 +35,11 @@ struct RefLine <: Ferrite.AbstractRefShape end
 # Lagrange {dim,shape,order} -> dim=1, shape=RefLine , order >= 1
 getnbasefunctions(::Lagrange{1,RefLine,order}) where {order} = order+1  #
 nvertexdofs(::Lagrange{1,RefLine,order}) where {order} = 1  # 
-ncelldofs(::Lagrange{1,RefLine,order}) where {order} = 1  #
 faces(::Lagrange{1,RefLine,order}) where {order} = ((1,), (2,)) #tuple([(i,) for i in 1:order+1]...)
 
 
 function reference_coordinates(::Lagrange{1,RefLine,order}) where {order}
+    order > 20 && throw(ArgumentError("The order must be less than 20"))
     n=order+1
     ξ_vec = collect(range(-1, stop=1, length=n))
     if order != 1
@@ -50,6 +50,7 @@ end
 
 
 function value(ip::Lagrange{1,RefLine,order}, i::Int, ξ::Vec{dim}) where {dim,order}
+    order > 20 && throw(ArgumentError("The order must be less than 20"))
     ξ_x = ξ[1]
     return lagrangePoly(order, i, ξ_x)
     throw(ArgumentError("no shape function $i for interpolation $ip"))

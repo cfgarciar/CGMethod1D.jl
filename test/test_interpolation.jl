@@ -38,7 +38,7 @@ end
     i1 = 1
     i2 = 2
     i3 = 3
-    ξ = Vec{1}((0.5,))
+    ξ = Vec{1}((-1.0,))
     N1 = value(ip, i1, ξ)
     N2 = value(ip, i2, ξ)
     N3 = value(ip, i3, ξ)
@@ -63,7 +63,7 @@ end
 
 
 @testset "reference_coordinates order 2" begin
-    order = 2; n = order+1;
+    order = 20; n = order+1;
     ip = Lagrange{1,RefLine,order}()
     coords = reference_coordinates(ip)
     println(coords)
