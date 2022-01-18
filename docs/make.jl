@@ -20,11 +20,10 @@
 #     push_preview=true,
 # )
 
-
-push!(LOAD_PATH,"../src/")
-
 using CGMethod1D
 using Documenter
+
+push!(LOAD_PATH,"../src/")
 
 makedocs(
          sitename = "CGMethod1D.jl",

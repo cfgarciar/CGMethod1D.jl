@@ -23,6 +23,3 @@ Modules = [CGMethod1D]
 - Sum the squares of two numbers
 
 ## Function Documentation
-```@docs
-MyFunction
-```
