@@ -1,6 +1,6 @@
 # Test Interpolation
-@testset "lagrange order 2" begin
-    order = 2
+@testset "lagrange order 1" begin
+    order = 1
     ip = Lagrange{1,RefLine,order}()
     bf = getnbasefunctions(ip)
     nv = CGMethod1D.nvertexdofs(ip)
@@ -9,7 +9,7 @@
 end
 
 
-@testset "lagrange order 3" begin
+@testset "lagrange order 2" begin
     order = 2
     ip = Lagrange{1,RefLine,order}()
     bf = getnbasefunctions(ip)
@@ -77,18 +77,43 @@ end
 end
 
 
-# @testset "faces order 1" begin
-#     order = 1
-#     ip = Lagrange{1,RefLine,order}()
-#     fa = faces(ip)
-#     println(fa) 
-# end
+@testset "Ferrite 1D order 1" begin
+    order = 1
+    i1 = 1
+    i2 = 2
+    ξ = Vec{1}((0.25,))
+    ip_F = Lagrange{1,RefCube,order}()
+    bf_F = getnbasefunctions(ip_F)
+    ip_C = Lagrange{1,RefLine,order}()
+    bf_C = getnbasefunctions(ip_C)
+    N1_F = value(ip_F, i1, ξ)
+    N2_F = value(ip_F, i2, ξ)
+    N1_C = value(ip_C, i1, ξ)
+    N2_C = value(ip_C, i2, ξ)
+    @test isapprox(bf_F, bf_C, atol=1e-8) 
+    @test isapprox(N1_F, N1_C, atol=1e-8)
+    @test isapprox(N2_F, N2_C, atol=1e-8) 
+end
 
 
-# @testset "faces order 2" begin
-#     order = 5
-#     ip = Lagrange{1,RefLine,order}()
-#     fa = faces(ip)
-#     println(fa) 
-# end
-
+@testset "Ferrite 1D order 2" begin
+    order = 2
+    i1 = 1
+    i2 = 2
+    i3 = 3
+    ξ = Vec{1}((0.25,))
+    ip_F = Lagrange{1,RefCube,order}()
+    bf_F = getnbasefunctions(ip_F)
+    ip_C = Lagrange{1,RefLine,order}()
+    bf_C = getnbasefunctions(ip_C)
+    N1_F = value(ip_F, i1, ξ)
+    N2_F = value(ip_F, i2, ξ)
+    N3_F = value(ip_F, i3, ξ)
+    N1_C = value(ip_C, i1, ξ)
+    N2_C = value(ip_C, i2, ξ)
+    N3_C = value(ip_C, i3, ξ)
+    @test isapprox(bf_F, bf_C, atol=1e-8) 
+    @test isapprox(N1_F, N1_C, atol=1e-8)
+    @test isapprox(N2_F, N2_C, atol=1e-8)
+    @test isapprox(N3_F, N3_C, atol=1e-8) 
+end
